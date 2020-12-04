@@ -1,17 +1,17 @@
-import * as jwt from 'jsonwebtoken';
+import * as jwt from "jsonwebtoken";
 
 export function isAdmin() {
   const checkJwt = (token) => {
     const strToken = jwt.decode(token);
 
-    if (strToken.admin == 1) {
+    if (strToken.admin === "1") {
       return true;
     } else {
       return false;
     }
-  }
+  };
 
-  return  getToken() != null ? checkJwt(getToken()) : false;
+  return getToken() != null ? checkJwt(getToken()) : false;
 }
 
 export function setToken(token) {

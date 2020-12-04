@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Row, Col, Table, Button } from "react-bootstrap";
+import { Row, Col, Table, Button, Container } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import ReactLoading from "react-loading";
 import SearchBar from "../../assets/components/common/SearchBar";
@@ -43,11 +43,9 @@ function ClientsView() {
   };
 
   return (
-    <Row>
-      <Col />
+    <Container>
       <SearchBar path="clients/search" handle={(data) => setClients(data)} />
-      <Col />
-      <Col />
+
       <Col md={10}>
         <h1>View</h1>
         {clients.length === 0 ? (
@@ -91,7 +89,7 @@ function ClientsView() {
         )}
       </Col>
       <Col />
-    </Row>
+    </Container>
   );
 }
 

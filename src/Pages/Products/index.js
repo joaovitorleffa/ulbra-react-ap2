@@ -1,12 +1,11 @@
 import React from "react";
-import { Link, useRouteMatch, Switch, Route, useParams } from "react-router-dom";
+import { Link, useRouteMatch, Switch, Route } from "react-router-dom";
 
 import { Container } from "react-bootstrap";
-import Category from '../../assets/components/Category';
+import Category from "../../assets/components/Category";
 
 function Products() {
   let { path, url } = useRouteMatch();
-  const { catId } = useParams();
 
   return (
     <Container>

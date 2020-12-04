@@ -1,15 +1,21 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Navbar, Nav } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import { isAdmin, deleteToken } from "../../../services/auth";
 
 function CustomNavBar() {
+  const [admin, setAdmin] = useState(false);
   const history = useHistory();
 
   const logout = () => {
     deleteToken();
+    setAdmin(false);
     history.push("/users/login");
   };
+
+  useEffect(() => {
+    setAdmin(isAdmin());
+  }, []);
 
   return (
     <Navbar bg="dark" variant="dark">
@@ -31,7 +37,7 @@ function CustomNavBar() {
         </Nav.Link>
       </Nav>
       <Nav>
-        {isAdmin() ? (
+        {admin ? (
           <>
             <Nav.Link>
               <Link onClick={logout}>Logout</Link>

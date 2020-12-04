@@ -30,9 +30,8 @@ function ContactsView() {
 
   return (
     <Container>
-      <Row>
-        <SearchBar path="clients/search" handle={(data) => setContacts(data)} />
-      </Row>
+      <SearchBar path="clients/search" handle={(data) => setContacts(data)} />
+
       <Row>
         <Col />
         <Col md={10}>
