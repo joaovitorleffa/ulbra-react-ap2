@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Navbar, Nav } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
+
 import { isAdmin, deleteToken } from "../../../services/auth";
 
 function CustomNavBar() {
@@ -19,7 +20,7 @@ function CustomNavBar() {
 
   return (
     <Navbar bg="dark" variant="dark">
-      <Navbar.Brand href="#home">React Bootstrap</Navbar.Brand>
+      <Navbar.Brand href="#home">React</Navbar.Brand>
       <Nav className="mr-auto">
         <Nav.Link>
           <Link exact to="/">
@@ -27,29 +28,29 @@ function CustomNavBar() {
           </Link>
         </Nav.Link>
         <Nav.Link>
-          <Link to="/about">About</Link>
+          <Link to="/about">Sobre</Link>
         </Nav.Link>
         <Nav.Link>
-          <Link to="/products">Products</Link>
+          <Link to="/products">Produtos</Link>
         </Nav.Link>
         <Nav.Link>
-          <Link to="/contacts">Contacts</Link>
+          <Link to="/contacts">Novo Contato</Link>
         </Nav.Link>
       </Nav>
       <Nav>
         {admin ? (
           <>
             <Nav.Link>
-              <Link onClick={logout}>Logout</Link>
+              <Link onClick={logout}>Sair</Link>
             </Nav.Link>
             <Nav.Link>
-              <Link to="/admin/contacts/view">View contacts</Link>
+              <Link to="/admin/contacts/view">Contatos</Link>
             </Nav.Link>
             <Nav.Link>
-              <Link to="/admin/clients/view">View clients</Link>
+              <Link to="/admin/clients/view">Clientes</Link>
             </Nav.Link>
             <Nav.Link>
-              <Link to="/admin/clients">Clients</Link>
+              <Link to="/admin/clients">Novo Cliente</Link>
             </Nav.Link>
           </>
         ) : (

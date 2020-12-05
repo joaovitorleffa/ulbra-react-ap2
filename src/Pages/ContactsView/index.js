@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { Row, Col, Table, Button, Container } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
-import SearchBar from "../../assets/components/common/SearchBar";
-import ReactLoading from "react-loading";
+import { Row, Col, Table, Button, Spinner } from "react-bootstrap";
 
-import { getToken } from "../../services/auth";
 import api from "../../services/api";
+import { getToken } from "../../services/auth";
+import SearchBar from "../../assets/components/common/SearchBar";
 
 function ContactsView() {
   const history = useHistory();
   const [contacts, setContacts] = useState([]);
 
   useEffect(() => {
+    loadContacts();
+  }, []);
+
+  const loadContacts = () => {
     api
       .get("/contacts", {
         params: {},
@@ -22,22 +25,31 @@ function ContactsView() {
       .then((response) => {
         setContacts(response.data);
       });
-  }, []);
+  };
 
   const handleResponse = (id) => {
     history.push(`/admin/contacts/${id}`);
   };
 
   return (
-    <Container>
-      <SearchBar path="clients/search" handle={(data) => setContacts(data)} />
-
+    <div>
+      <SearchBar
+        path="contacts/search"
+        handle={(data) =>
+          data.length !== 0 ? setContacts(data) : loadContacts()
+        }
+      />
       <Row>
-        <Col />
-        <Col md={10}>
-          <h1>View</h1>
+        <Col md={12}>
+          <h1>Contatos</h1>
           {contacts.length === 0 ? (
-            <ReactLoading type="spin" color="green" className="loading" />
+            <Row className="3">
+              <Col md={5} />
+              <Col md={2}>
+                <Spinner animation="grow" variant="primary" />
+              </Col>
+              <Col md={5} />
+            </Row>
           ) : (
             <Table striped bordered hover>
               <thead>
@@ -71,9 +83,8 @@ function ContactsView() {
             </Table>
           )}
         </Col>
-        <Col />
       </Row>
-    </Container>
+    </div>
   );
 }
 

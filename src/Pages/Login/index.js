@@ -1,10 +1,13 @@
 import React from "react";
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-import { ErrorMessage } from "@hookform/error-message";
 import { useHistory } from "react-router-dom";
+import { ErrorMessage } from "@hookform/error-message";
+import { Row, Col, Form, Button } from "react-bootstrap";
+
 import api from "../../services/api";
 import { setToken } from "../../services/auth";
+
+import "./styles.css";
 
 function Login() {
   const { handleSubmit, register, errors } = useForm();
@@ -23,17 +26,18 @@ function Login() {
       })
       .finally(() => {
         history.push("/admin/home");
+        window.location.reload();
       });
   };
 
   return (
-    <Container>
+    <div className="mt-5">
       <Row>
         <Col />
         <Col>
           <Form onSubmit={handleSubmit(onSubmit)}>
             <Form.Group>
-              <Form.Label>User</Form.Label>
+              <Form.Label className="label">User</Form.Label>
               <Form.Control
                 ref={register({
                   required: "Required",
@@ -46,7 +50,7 @@ function Login() {
               <ErrorMessage errors={errors} name="user" />
             </Form.Group>
             <Form.Group>
-              <Form.Label>Password</Form.Label>
+              <Form.Label className="label">Password</Form.Label>
               <Form.Control
                 ref={register({
                   required: "Required",
@@ -58,14 +62,14 @@ function Login() {
               />
               <ErrorMessage errors={errors} name="password" />
             </Form.Group>
-            <Button variant="primary" type="submit">
+            <Button variant="primary" type="submit" className="button">
               Submit
             </Button>
           </Form>
         </Col>
         <Col />
       </Row>
-    </Container>
+    </div>
   );
 }
 
